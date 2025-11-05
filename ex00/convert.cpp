@@ -1,5 +1,13 @@
 #include "convert.hpp"
 
+void print()
+{
+    std::cout << "Char:" <<"impossible"<< std::endl;
+    std::cout << "Int: " <<"impossible"<< std::endl;
+    std::cout << std::fixed << std::setprecision(1) << "Float: "<<"impossible"<< std::endl;
+    std::cout << "Double:" <<"impossible"<< std::endl;
+}
+
 void ScalarConverter::convert(std::string value)
 {
     int i = 0;
@@ -16,10 +24,10 @@ void ScalarConverter::convert(std::string value)
         flo = 1;
     if (value.find('.') != std::string::npos)
         db = 1;
-    if(value == "nan")
+    if (value == "nan")
     {
         double n = atof(value.c_str());
-        std::cout <<n<<std::endl;
+        std::cout << "----> " << n << std::endl;
     }
     if (flo)
     {
@@ -58,30 +66,38 @@ void ScalarConverter::convert(std::string value)
             std::cout << "Double: " << bb << std::endl;
             return;
         }
-        else
+        else if (!(value[0] <= 47))
         {
             double bb = static_cast<double>(i);
             float ff = static_cast<float>(i);
             char c = static_cast<char>(i);
-            if(c == 0)
-                std::cout << "Char:" <<"impossible"<< std::endl;
+            if (c == 0)
+                std::cout << "Char:" << "impossible" << std::endl;
+            else
+                std::cout << "Char:" << "impossible" << std::endl;
             std::cout << "Int: " << i << std::endl;
             std::cout << std::fixed << std::setprecision(1) << "Float: " << ff << "f" << std::endl;
             std::cout << "Double:" << bb << std::endl;
             return;
         }
+        else
+            print();
     }
     else
     {
-            double bb = static_cast<double>(i);
-            float ff = static_cast<float>(i);
-            char c = static_cast<char>(i);
-            if(c > 126 || c <= 32)
-                std::cout << "Char:" << "Not printable" << std::endl;  
-            else  
-                std::cout << "Char:" << c << std::endl;
-            std::cout << "Int: " << i << std::endl;
-            std::cout << std::fixed << std::setprecision(1) << "Float: " << ff << "f" << std::endl;
-            std::cout << "Double:" << bb << std::endl;
+        double bb = static_cast<double>(i);
+        float ff = static_cast<float>(i);
+        char c = static_cast<char>(i);
+        
+        if (c > 126 || c <= 32)
+        {
+            print();
+            return;
+        }
+        else
+            std::cout << "Char:" << c << std::endl;
+        std::cout << "Int: " << i << std::endl;
+        std::cout << std::fixed << std::setprecision(1) << "Float: " << ff << ".f" << std::endl;
+        std::cout << "Double:" << bb << std::endl;
     }
 }
