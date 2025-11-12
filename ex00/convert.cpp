@@ -24,10 +24,15 @@ void ScalarConverter::convert(std::string value)
         flo = 1;
     if (value.find('.') != std::string::npos)
         db = 1;
-    if (value == "nan")
+    if (value == "nan" || value == "nanf" || value == "+inf" || value == "-inf" || value == "+inff" || value == "-inff")
     {
         double n = atof(value.c_str());
-        std::cout << "----> " << n << std::endl;
+        float ft = static_cast<float>(n);
+        std::cout << "Char:" <<"impossible"<< std::endl;
+        std::cout << "Int: " << "impossible"<< std::endl;
+        std::cout << "Float: " << std::fixed << std::setprecision(1) << ft << "f" << std::endl;
+        std::cout << "Double: " << std::fixed << std::setprecision(1) << n << std::endl;
+        return;
     }
     if (flo)
     {
@@ -45,7 +50,8 @@ void ScalarConverter::convert(std::string value)
         float bb = static_cast<float>(dou_ble);
         int inter_ = static_cast<int>(dou_ble);
         char c = static_cast<char>(dou_ble);
-        std::cout << "Char: " << c << std::endl;
+
+        std::cout << "Char: " <<c<< std::endl;
         std::cout << "Int: " << inter_ << std::endl;
         std::cout << "Float: " << std::fixed << std::setprecision(1) << bb << "f" << std::endl;
         std::cout << "Double: " << std::fixed << std::setprecision(1) << dou_ble << std::endl;
@@ -66,7 +72,7 @@ void ScalarConverter::convert(std::string value)
             std::cout << "Double: " << bb << std::endl;
             return;
         }
-        else if (!(value[0] <= 47))
+        else if (isdigit(value[0]))
         {
             double bb = static_cast<double>(i);
             float ff = static_cast<float>(i);
@@ -87,15 +93,7 @@ void ScalarConverter::convert(std::string value)
     {
         double bb = static_cast<double>(i);
         float ff = static_cast<float>(i);
-        char c = static_cast<char>(i);
-        
-        if (c > 126 || c <= 32)
-        {
-            print();
-            return;
-        }
-        else
-            std::cout << "Char:" << c << std::endl;
+        std::cout << "Char:" << "impossible"<< std::endl;
         std::cout << "Int: " << i << std::endl;
         std::cout << std::fixed << std::setprecision(1) << "Float: " << ff << ".f" << std::endl;
         std::cout << "Double:" << bb << std::endl;
